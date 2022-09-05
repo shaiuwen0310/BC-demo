@@ -1,0 +1,44 @@
+# POST http://localhost:5008/v1/scanfile/invoke
+# content-type: application/json
+
+# {
+#     "identity": "org1user1",
+#     "values": {
+#         "filename": "abc.txt",
+#         "hash": "e8f0380cb674b4e0420eb413b6c67208f05c0a28fb3640f3725d931ec1230b6d"
+#     }
+# }
+
+
+
+# POST http://localhost:5008/v1/scanfile/lists
+# content-type: application/json
+
+# {
+#     "identity": "org1user1",
+#     "hash": ["e8f0380cb674b4e0420eb413b6c67208f05c0a28fb3640f3725d931ec1230b6d"]
+# }
+
+
+
+# POST http://localhost:5008/v1/scanfile/delete
+# content-type: application/json
+
+# {
+#     "identity": "org1user1",
+#     "hash": "e8f0380cb674b4e0420eb413b6c67208f05c0a28fb3640f3725d931ec1230b6d"
+# }
+
+
+
+# POST http://localhost:5008/v1/scanfile/history
+# content-type: application/json
+
+# {
+#     "identity": "org1user1",
+#     "hash": "e8f0380cb674b4e0420eb413b6c67208f05c0a28fb3640f3725d931ec1230b6d"
+# }
+
+
+
+

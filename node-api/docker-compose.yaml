@@ -1,0 +1,62 @@
+version: '2'
+
+networks:
+  bcnet:
+    name: scanfile_bcnet
+
+services:
+
+  scanfile-node-api-org1:
+    container_name: scanfile-node-api-org1
+    image: scanfile-node-api:amd64-v1.0.0
+    build: ./src
+    restart: always
+    environment:
+      - TZ=Asia/Taipei
+      - NODE_API_PORT=5008
+      - GATEWAY_FILE_PATH=/src/gateway/org1-Network.yaml
+      - WALLET_PATH=/src/wallet
+      - CHANNEL_NAME=ngmtsyschannel
+    working_dir: /src/scanfile-node-api
+    command: ["pm2-docker", "process.yml", "--only", "scanfile-node-api"]
+    volumes:
+      - ./wallet:/src/wallet
+      - ./gateway:/src/gateway
+      - ../fabric-network/network/organizations:/src/organizations
+    ports:
+      - 5008:5008
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet
+
+  scanfile-node-api-org2:
+    container_name: scanfile-node-api-org2
+    image: scanfile-node-api:amd64-v1.0.0
+    build: ./src
+    restart: always
+    environment:
+      - TZ=Asia/Taipei
+      - NODE_API_PORT=5009
+      - GATEWAY_FILE_PATH=/src/gateway/org2-Network.yaml
+      - WALLET_PATH=/src/wallet
+      - CHANNEL_NAME=ngmtsyschannel
+    working_dir: /src/scanfile-node-api
+    command: ["pm2-docker", "process.yml", "--only", "scanfile-node-api"]
+    volumes:
+      - ./wallet:/src/wallet
+      - ./gateway:/src/gateway
+      - ../fabric-network/network/organizations:/src/organizations
+    ports:
+      - 5009:5009
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet
+

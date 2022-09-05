@@ -1,0 +1,20 @@
+{
+  "name": "scanfile-node-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "fabric-ca-client": "^2.2.4",
+    "fabric-network": "^2.2.4",
+    "js-yaml": "^4.1.0",
+    "log4js": "^6.4.1"
+  }
+}

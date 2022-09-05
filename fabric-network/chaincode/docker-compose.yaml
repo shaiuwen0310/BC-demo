@@ -1,0 +1,89 @@
+version: '2'
+
+networks:
+  bcnet:
+    # external: true
+    name: scanfile_bcnet
+
+services:
+
+  chaincode-scanfile-peer0-org1:
+    build: ./chaincode-scanfile
+    container_name: chaincode-scanfile-peer0-org1
+    image: chaincode-scanfile:amd64-v1.0.0
+    # hostname: chaincode-scanfile-peer0-org1
+    environment:
+      - TZ=Asia/Taipei
+      - CHAINCODE_SERVER_ADDRESS=chaincode-scanfile-peer0-org1:7052
+      - CHAINCODE_ID=scanfile_1.0.0:6197e619dcd0839ac6be146b45ae3b59afa87302463602f25f14440142c0bb83
+    working_dir: /go/src
+    command: ["chaincode-scanfile"]
+    expose:
+      - 7052
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet
+
+  chaincode-scanfile-peer1-org1:
+    build: ./chaincode-scanfile
+    container_name: chaincode-scanfile-peer1-org1
+    image: chaincode-scanfile:amd64-v1.0.0
+    environment:
+      - TZ=Asia/Taipei
+      - CHAINCODE_SERVER_ADDRESS=chaincode-scanfile-peer1-org1:8052
+      - CHAINCODE_ID=scanfile_1.0.0:6197e619dcd0839ac6be146b45ae3b59afa87302463602f25f14440142c0bb83
+    working_dir: /go/src
+    command: ["chaincode-scanfile"]
+    expose:
+      - 8052
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet
+
+  chaincode-scanfile-peer0-org2:
+    build: ./chaincode-scanfile
+    container_name: chaincode-scanfile-peer0-org2
+    image: chaincode-scanfile:amd64-v1.0.0
+    environment:
+      - TZ=Asia/Taipei
+      - CHAINCODE_SERVER_ADDRESS=chaincode-scanfile-peer0-org2:9052
+      - CHAINCODE_ID=scanfile_1.0.0:6197e619dcd0839ac6be146b45ae3b59afa87302463602f25f14440142c0bb83
+    working_dir: /go/src
+    command: ["chaincode-scanfile"]
+    expose:
+      - 9052
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet
+
+  chaincode-scanfile-peer1-org2:
+    build: ./chaincode-scanfile
+    container_name: chaincode-scanfile-peer1-org2
+    image: chaincode-scanfile:amd64-v1.0.0
+    environment:
+      - TZ=Asia/Taipei
+      - CHAINCODE_SERVER_ADDRESS=chaincode-scanfile-peer1-org2:10052
+      - CHAINCODE_ID=scanfile_1.0.0:6197e619dcd0839ac6be146b45ae3b59afa87302463602f25f14440142c0bb83
+    working_dir: /go/src
+    command: ["chaincode-scanfile"]
+    expose:
+      - 10052
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+    networks:
+      - bcnet

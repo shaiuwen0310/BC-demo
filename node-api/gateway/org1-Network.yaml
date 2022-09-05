@@ -1,0 +1,118 @@
+---
+
+################################################################################
+#   CHANNEL TEMPLATE
+################################################################################
+channel: &channel
+  orderers:
+    - orderer0-org0
+    - orderer1-org0
+    - orderer2-org0
+
+  peers:
+    peer0-org1:
+      endorsingPeer: true
+      chaincodeQuery: true
+      ledgerQuery: true
+      eventSource: true
+
+    peer1-org1:
+      endorsingPeer: true
+      chaincodeQuery: true
+      ledgerQuery: true
+      eventSource: true
+
+################################################################################
+#   GATEWAY CONFIG
+################################################################################
+
+name: "blockchain.for.org1"
+
+x-type: "hlfv1"
+
+description: "a connection profile for org1"
+
+version: "1.0"
+
+client:
+  organization: Org1
+
+channels:
+  ngmtsyschannel:
+    << : *channel
+
+organizations:
+  Org1:
+    mspid: Org1MSP
+
+    peers:
+      - peer0-org1
+      - peer1-org1
+
+    certificateAuthorities:
+      - ca-org1
+    adminPrivateKey:
+      path: /src/organizations/peerOrganizations/org1.company.com/users/Admin0@org1.company.com/msp/keystore/5f954af7cafc7404c4720c4196131f9ac8557488d19ab57b27af803a8f2c1d37_sk
+    signedCert:
+      path: /src/organizations/peerOrganizations/org1.company.com/users/Admin0@org1.company.com/msp/signcerts/cert.pem
+
+orderers:
+  orderer0-org0:
+    url: grpcs://172.18.0.7:7050
+    grpcOptions:
+      ssl-target-name-override: orderer0-org0
+      grpc-max-send-message-length: -1
+      grpc-max-receive-message-length: -1
+    tlsCACerts:
+      path: /src/organizations/ordererOrganizations/org0.company.com/orderers/orderer0-org0/msp/tlscacerts/tlsca.company.com-cert.pem
+
+  orderer1-org0:
+    url: grpcs://172.18.0.8:8050
+    grpcOptions:
+      ssl-target-name-override: orderer1-org0
+      grpc-max-send-message-length: -1
+      grpc-max-receive-message-length: -1
+    tlsCACerts:
+      path: /src/organizations/ordererOrganizations/org0.company.com/orderers/orderer1-org0/msp/tlscacerts/tlsca.company.com-cert.pem
+
+  orderer2-org0:
+    url: grpcs://172.18.0.9:9050
+    grpcOptions:
+      ssl-target-name-override: orderer2-org0
+      grpc-max-send-message-length: -1
+      grpc-max-receive-message-length: -1
+    tlsCACerts:
+      path: /src/organizations/ordererOrganizations/org0.company.com/orderers/orderer2-org0/msp/tlscacerts/tlsca.company.com-cert.pem
+
+
+peers:
+  peer0-org1:
+    url: grpcs://172.18.0.12:7051
+    grpcOptions:
+      ssl-target-name-override: peer0-org1
+      grpc-max-send-message-length: -1
+      grpc-max-receive-message-length: -1
+      request-timeout: 120001
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: /src/organizations/peerOrganizations/org1.company.com/msp/tlscacerts/ca.crt
+ 
+  peer1-org1:
+    url: grpcs://172.18.0.11:8051
+    grpcOptions:
+      ssl-target-name-override: peer1-org1
+      grpc-max-send-message-length: -1
+      grpc-max-receive-message-length: -1
+      request-timeout: 120001
+      grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: /src/organizations/peerOrganizations/org1.company.com/msp/tlscacerts/ca.crt
+
+certificateAuthorities:
+  ca-org1:
+    url: https://172.18.0.4:8054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /src/organizations/peerOrganizations/org1.company.com/tlsca/tlsca.org1.company.com-cert.pem
+    caName: ca-org1

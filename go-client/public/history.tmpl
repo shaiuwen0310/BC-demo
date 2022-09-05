@@ -1,0 +1,43 @@
+<html>
+    <h1>結果: {{.Result}}</h1>
+    <p>檔案雜湊值: {{.Hash}}</p>
+    <p>回應訊息: {{.Message}}</p>
+    <p>回應代碼: {{.Rtnc}}</p>
+    <p>歷史資訊: </p>
+
+    <script>
+    // 並未處理rtnc!=0的情況
+    console.log({{.Info}})
+    console.log(Object.keys({{.Info}}[0]).length)
+    console.log({{.Info}}[0].userid  === "")
+    console.log({{.Info}}[0].userid)
+    
+    var table = "";
+    var rows = {{.Info}}.length;
+    const cols = 6;
+    var seq = 1
+    for (var r=rows;r>=1;r--){
+        table += '<tr>';
+        //for (var c=1; c <= cols; c++){
+            table += '<td>' + seq + '</td>';
+            table += '<td>' + {{.Info}}[r-1].hash + '</td>';
+            table += '<td>' + {{.Info}}[r-1].txid + '</td>';
+            table += '<td>' + {{.Info}}[r-1].userid + '</td>';
+            table += '<td>' + {{.Info}}[r-1].filename + '</td>';
+            table += '<td>' + {{.Info}}[r-1].last6txid + '</td>';
+        //}
+        table += '</tr>';
+        seq++
+    }
+    document.write('<table border=1>' +
+    '<th>交易次序</th>' +
+    '<th>檔案雜湊值</th>' +
+    '<th>交易序號</th>' +
+    '<th>使用者代號</th>' +
+    '<th>檔案名稱</th>' +
+    '<th>交易序號後六碼</th>' +
+     table + '</table>')
+    </script>
+
+    <input type ="button" onclick="history.back()" value="回到上一頁"></input>
+</html>

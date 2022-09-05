@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>hyperledger fabric Sample</title>
+</head>
+<body>
+    <h1>檔案的認證與驗證</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <!-- <input type="text" name="name"><br> -->
+        <!-- <input type="email" name="email"> -->
+        輸入ID: <input type="text" name="walletid" value="org1user1"><br>
+        選擇檔案: <input type="file" name="file"><br>
+        選擇功能: 
+        <input type="radio" name="function" value="cert">認證
+        <input type="radio" name="function" value="delete">刪除
+        <input type="radio" name="function" value="verify">驗證<br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

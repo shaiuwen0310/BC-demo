@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  bcnet:
+    name: scanfile_bcnet
+
+services:
+
+  scanfile-web:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+    networks:
+      - bcnet
