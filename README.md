@@ -122,7 +122,7 @@ $ cd ~/Desktop/fabric-project/go-client
 docker-compose up -d
 ```
 
-## 需要再討論的狀況
+## 需要再調整的狀況
 * policy設定成`"OR('Org1MSP.member','Org2MSP.member')"`，在deploycc-2nd-shell.sh、deploycc-3nd-shell.sh帶入參數
 * peer lifecycle chaincode commit時，`--peerAddresses`依舊要設定兩個組織的peer才可以，否則會有ENDORSEMENT_POLICY_FAILURE，目前寫死--peerAddresses＝peer0-org2在deploycc-3nd-cmd.sh中
 * node api無token、https
